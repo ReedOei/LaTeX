@@ -3,10 +3,17 @@
 \usepackage{ifthen}
 \usepackage{calc}
 \usepackage{xspace}
+\usepackage{mathrsfs}
 
 \newcounter{i}
 \newcounter{j}
 \newcounter{n1}
+
+\newcommand{\concat}{%
+  \mathbin{\raisebox{0.5ex}{\scalebox{.7}{$\frown$}}}%
+}
+
+\renewcommand{\epsilon}{\varepsilon}
 
 %\newcommand{\reed}[1]{\relax}
 %\newcommand{\Fix}[1]{\relax}
@@ -15,6 +22,9 @@
 \newcommand{\Comment}[1]{}
 \newcommand{\Space}[1]{}
 \newcommand{\Num}[1]{#1}
+
+\newcommand{\injects}{\ensuremath{\hookrightarrow}}
+\newcommand{\surjects}{\ensuremath{\twoheadrightarrow}}
 
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
@@ -30,6 +40,32 @@
 \newcommand{\integers}{\ensuremath{\mathbb{Z}}}
 \newcommand{\rational}{\ensuremath{\mathbb{Q}}}
 \newcommand{\complex}{\ensuremath{\mathbb{C}}}
+
+\newcommand{\nonzero}[1]{\ensuremath{#1_{\neq 0}}}
+\newcommand{\greaterset}[2]{\ensuremath{#1_{> #2}}}
+\newcommand{\lesserset}[2]{\ensuremath{#1_{< #2}}}
+\newcommand{\subgroup}[2]{\ensuremath{#1 < #2}}
+\newcommand{\normalsubgroup}[2]{\ensuremath{#1 \triangleleft #2}}
+\newcommand{\id}[1]{\ensuremath{\bm{1}_{#1}}}
+
+\newcommand{\notationNonZero}[1][X]{Let $\nonzero{#1}$ denote the set of $x \in #1$ so that $x \neq 0$.\xspace}
+\newcommand{\notationGreaterSet}[1][X]{Let $\greaterset{#1}{y}$ denote the set of $x \in #1$ so that $x > y$.\xspace}
+\newcommand{\notationLesserSet}[1][X]{Let $\lesserset{#1}{y}$ denote the set of $x \in X$ so that $x < y$.\xspace}
+\newcommand{\notationSubgroup}[1][H]{Let $\subgroup{#1}{G}$ denote that $#1$ is a subgroup of $G$.\xspace}
+\newcommand{\notationNormalSubgroup}[1][N]{Let $\normalsubgroup{#1}{G}$ denote that $#1$ is a normal subgroup of $G$.\xspace}
+\newcommand{\notationIdentity}[1][X]{Let $\id{#1}$ denote the identity function on $#1$.\xspace}
+
+% \Sym{X} is the set of bijections from X to X
+\newcommand{\Sym}[1]{\ensuremath{\text{Sym}\parens{#1}}}
+\newcommand{\Aut}[1]{\ensuremath{\text{Aut}\parens{#1}}}
+\newcommand{\notationSym}[1][X]{Let $\Sym{X}$ be the group of bijections of $X$.\xspace}
+
+\newcommand{\toplim}{\ensuremath{\text{T}\lim}}
+\newcommand{\toplimup}{\ensuremath{\overline{\toplim}}}
+\newcommand{\toplimlow}{\ensuremath{\underline{\toplim}}}
+
+\newcommand{\emptysingleton}{\ensuremath{\curlys{\emptyset}}}
+\newcommand{\withoutempty}{\ensuremath{\setminus \emptysingleton}}
 
 \newcommand{\isnat}[1]{\ensuremath{#1 \in \nat}}
 \newcommand{\seq}[3]{\ensuremath{{\left( #1_{#2} \right)}_{#2 \in #3}}}
@@ -66,7 +102,11 @@
 
 \newcommand{\setbuild}[2]{\ensuremath{\left\{ {#1} : {#2} \right\}}}
 
-\newcommand{\openball}[3]{\ensuremath{B_{#1}\parens{{#2},{#3}}}}
+\newcommand{\openball}[3][]{\ensuremath{B_{#1}\parens{{#2},{#3}}}}
+\newcommand{\closedball}[3][]{\ensuremath{\overline{B}_{#1}\parens{{#2},{#3}}}}
+
+\newcommand{\powerset}[1]{\ensuremath{\mathcal{P}\parens{#1}}}
+\newcommand{\powersetfin}[1]{\ensuremath{\mathcal{P}_{\text{fin}}\parens{#1}}}
 
 \newcommand{\subgroupgen}[1]{\ensuremath{{\left< {#1} \right>}}}
 
@@ -87,31 +127,70 @@
 
 \newcommand{\after}{\circ}
 
-\newcommand{\Sym}[1]{\ensuremath{\text{Sym}\parens{#1}}}
 
-\newcommand{\finitecomma}[2]{\ensuremath{#1_0, #1_1, \ldots, #1_{#2 - 1}}}
+\newcommand{\finitecommabody}[1]{}
+\newcommand{\countablecommabody}[1]{}
+\newcommand{\finitecomma}[2]{%
+    \renewcommand{\finitecommabody}[1]{#1}%
+    \ensuremath{ \finitecommabody{0}, \finitecommabody{1}, \ldots, \finitecommabody{#2 - 1}}}
 \newcommand{\finiteset}[2]{\ensuremath{\curlys{\finitecomma{#1}{#2}}}}
+\newcommand{\countablecomma}[1]{\ensuremath{%
+    \renewcommand{\countablecommabody}[1]{#1}%
+    \ensuremath{ \countablecommabody{0}, \countablecommabody{1}, \ldots}}}
+\newcommand{\countableset}[1]{\ensuremath{\curlys{\countablecomma{#1}}}}
 
 \newcommand{\woutlog}{without loss of generality\xspace}
 \newcommand{\Woutlog}{Without loss of generality\xspace}
 
-\newcommand{\deffuncparam}[6]{%
-    \expandafter\newcommand\csname domain#1\endcsname{\ensuremath{#3}}%
-    \expandafter\newcommand\csname codomain#1\endcsname{\ensuremath{#5}}%
-    \expandafter\newcommand\csname decl#1\endcsname{\ensuremath{#1_{#2} : #3 #4 #5}}%
-    \expandafter\newcommand\csname funcname#1\endcsname[1]{\ensuremath{#1_{##1}}}%
-    \expandafter\newcommand\csname body#1\endcsname[2]{\ensuremath{#6}}%
-    \expandafter\newcommand\csname call#1\endcsname[2]{\ensuremath{#1_{#2} \parens{##1}}}%
+\newcommand{\actOn}[2]{\ensuremath{#1 \cdot #2}}
+\newcommand{\kernel}[1]{\ensuremath{\text{ker}\parens{#1}}}
+
+\newcommand{\deffuncparam}[7]{%
+    \expandafter\newcommand\csname domain#1\endcsname{\ensuremath{#4}}%
+    \expandafter\newcommand\csname codomain#1\endcsname{\ensuremath{#6}}%
+    \expandafter\newcommand\csname decl#1\endcsname{\ensuremath{#2_{#3} : #4 #5 #6}}%
+    \expandafter\newcommand\csname funcname#1\endcsname[1]{\ensuremath{#2_{##1}}}%
+    \expandafter\newcommand\csname body#1\endcsname[2]{\ensuremath{#7}}%
+    \expandafter\newcommand\csname call#1\endcsname[2]{\ensuremath{#2_{##1} \parens{##2}}}%
+    \expandafter\newcommand\csname callbody#1\endcsname[2]{\ensuremath{\expandafter\csname call#1\endcsname{##1}{##2} = \expandafter\csname body#1\endcsname{##1}{##2}}}%
     \expandafter\newcommand\csname map#1\endcsname[2]{\ensuremath{##1 \mapsto \expandafter\csname body#1\endcsname{##1}{##2} }}%
+    \expandafter\newcommand\csname inversecall#1\endcsname[2]{\ensuremath{#2_{##1} \parens{##2}^{-1}}}%
+    \expandafter\newcommand\csname image#1\endcsname[1]{\ensuremath{\text{im}\parens{#2_{##1}}}}%
 }
 
-\newcommand{\deffunc}[5]{%
-    \expandafter\newcommand\csname domain#1\endcsname{\ensuremath{#2}}%
-    \expandafter\newcommand\csname codomain#1\endcsname{\ensuremath{#4}}%
-    \expandafter\newcommand\csname decl#1\endcsname{\ensuremath{#1 : #2 #3 #4}}%
-    \expandafter\newcommand\csname funcname#1\endcsname{\ensuremath{#1}}%
-    \expandafter\newcommand\csname body#1\endcsname[1]{#5}%
-    \expandafter\newcommand\csname call#1\endcsname[1]{\ensuremath{#1 \parens{##1}}}%
-    \expandafter\newcommand\csname map#1\endcsname[1]{\ensuremath{##1 \mapsto \expandafter {\csname body#1 \endcsname} {##1} }}%
+\newcommand{\defbinfunc}[6]{%
+    \expandafter\newcommand\csname domain#1\endcsname{\ensuremath{#3}}%
+    \expandafter\newcommand\csname codomain#1\endcsname{\ensuremath{#5}}%
+    \expandafter\newcommand\csname decl#1\endcsname{\ensuremath{#2 : #3 #4 #5}}%
+    \expandafter\newcommand\csname funcname#1\endcsname{\ensuremath{#2}}%
+    \expandafter\newcommand\csname body#1\endcsname[2]{#6}%
+    \expandafter\newcommand\csname call#1\endcsname[2]{\ensuremath{#2 \parens{##1, ##2}}}%
+    \expandafter\newcommand\csname callpair#1\endcsname[1]{\ensuremath{#2 \parens{##1}}}%
+    \expandafter\newcommand\csname callbody#1\endcsname[2]{\ensuremath{\expandafter\csname call#1\endcsname{##1}{##2} = \expandafter\csname body#1\endcsname{##1}{##2}}}%
+    \expandafter\newcommand\csname map#1\endcsname[2]{\ensuremath{\parens{##1, ##2} \mapsto \expandafter\csname body#1\endcsname{##1}{##2} }}%
+}
+
+\newcommand{\defbinop}[6]{%
+    \expandafter\newcommand\csname domain#1\endcsname{\ensuremath{#3}}%
+    \expandafter\newcommand\csname codomain#1\endcsname{\ensuremath{#5}}%
+    \expandafter\newcommand\csname decl#1\endcsname{\ensuremath{#2 : #3 #4 #5}}%
+    \expandafter\newcommand\csname funcname#1\endcsname{\ensuremath{#2}}%
+    \expandafter\newcommand\csname body#1\endcsname[2]{#6}%
+    \expandafter\newcommand\csname call#1\endcsname[2]{\ensuremath{##1 #2 ##2}}%
+    \expandafter\newcommand\csname callbody#1\endcsname[2]{\ensuremath{\expandafter\csname call#1\endcsname{##1}{##2} = \expandafter\csname body#1\endcsname{##1}{##2}}}%
+    \expandafter\newcommand\csname map#1\endcsname[2]{\ensuremath{\parens{##1, ##2} \mapsto \expandafter\csname body#1\endcsname{##1}{##2} }}%
+}
+
+\newcommand{\deffunc}[6]{%
+    \expandafter\newcommand\csname domain#1\endcsname{\ensuremath{#3}}%
+    \expandafter\newcommand\csname codomain#1\endcsname{\ensuremath{#5}}%
+    \expandafter\newcommand\csname decl#1\endcsname{\ensuremath{#2 : #3 #4 #5}}%
+    \expandafter\newcommand\csname funcname#1\endcsname{\ensuremath{#2}}%
+    \expandafter\newcommand\csname body#1\endcsname[1]{#6}%
+    \expandafter\newcommand\csname call#1\endcsname[1]{\ensuremath{#2 \parens{##1}}}%
+    \expandafter\newcommand\csname callbody#1\endcsname[1]{\ensuremath{\expandafter\csname call#1\endcsname{##1} = \expandafter\csname body#1\endcsname{##1}}}%
+    \expandafter\newcommand\csname map#1\endcsname[1]{\ensuremath{##1 \mapsto \expandafter\csname body#1\endcsname{##1} }}%
+    \expandafter\newcommand\csname invcall#1\endcsname[1]{\ensuremath{#2^{-1}\parens{##1}}}%
+    \expandafter\newcommand\csname image#1\endcsname{\ensuremath{\text{im}\parens{#2}}}%
 }
 
