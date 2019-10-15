@@ -1,0 +1,35 @@
+\include{macros}
+
+\usepackage{cleveref}
+
+\newcommand{\closureProdIsProdClosure}[1][closureProdIsProdClosure]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $X$ and $Y$ be topological spaces and let $A \subseteq X$ and $B \subseteq Y$.
+        Then $\overline{A} \times \overline{B} = \overline{A \times B}$.
+    \end{lemma}
+    \begin{proof}
+        First, suppose $(a,b) \in \overline{A} \times \overline{B}$.
+        If $U$ is some open set containing $(a,b)$, then there are open sets $V \ni a$ and $W \ni b$ so that $V \times W \subseteq U$, $V \cap A$, and $W \cap B$: either $a \in A$ or $a \in \partial A$, and similarly for $b$ and $W$.
+        Then $U \cap \overline{A \times B}$ for every such $U$, so $(a,b) \in \overline{A \times B}$.
+
+        Now, suppose that $(a,b) \in \overline{A \times B}$.
+        Let $V \ni a$ and $W \ni b$ be open sets.
+        Then $V \times W$ is an open set containing $(a,b)$, so $(V \times W) \cap (A \times B)$, so $V \cap A$ and $W \cap B$.
+        So then either $a \in A$ or $a \in \partial A$, and similarly for $b$ and $B$, because every open set around $a$ intersects $A$.
+    \end{proof}
+}
+
+\newcommand{\closureSubgroupIsSubgroup}[1][closureSubgroupIsSubgroup]{%
+    \closureProdIsProdClosure[closureProd]
+
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $G$ be a topological group and $\subgroup{H}{G}$ be a subgroup.
+        Then $\overline{H}$ is also a subgroup of $G$.
+    \end{lemma}
+    \begin{proof}
+        Because $G$ is a topological group, the function $f : G \times G \to G$ defined by $(x,y) \mapsto xy^{-1}$ is continuous, so $f^{-1}(\overline{H})$ is a closed set in $G \times G$, and $H \times H \subseteq f^{-1}(\overline{H})$.
+        So then $\overline{H \times H} \subseteq f^{-1}(\overline{H})$.
+        But because $\overline{H \times H} = \overline{H} \times \overline{H}$ by~\Cref{lem:closureProd}, $f(\overline{H} \times \overline{H}) \subseteq f(f^{-1}(\overline{H})) = \overline{H}$, so $\overline{H}$ is a subgroup.
+    \end{proof}
+}
+
