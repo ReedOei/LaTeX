@@ -33,3 +33,105 @@
     \end{proof}
 }
 
+\newcommand{\comeagerInComeagerIsComeager}[1][comeagerInComeagerIsComeager]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $X$ be a topological space and let $A \subseteq X$.
+        If $U \forces A$, that is, $A$ is comeager in $U$ and $U$ is itself comeager, then $A$ is comeager.
+    \end{lemma}
+    \begin{proof}
+        Suppose $U \forces A$.
+        Then clearly $U \cup U^c = X$, so $(U \cup U^c) \setminus A = (U \setminus A) \cup (U^c \setminus A) = X \setminus A = A^c$.
+        Clearly $U^c \setminus A$ is meager, because $U^c$ is meager, and $U \setminus A$ is meager because $U \forces A$.
+        So then $A^c$ is the union of two meager sets and so is itself meager; that is, $A$ is comeager.
+    \end{proof}
+}
+
+\newcommand{\forcesBothForcesIntersection}[1][forcesBothForcesIntersection]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $X$ be a topological space, and let $U \subseteq X$ be an open set and $A,B \subseteq X$ be subsets.
+        If $U \forces A$ and $U \forces B$, then $U \forces A \cap B$.
+    \end{lemma}
+    \begin{proof}
+        We have $U \forces A$, so $U \setminus A$ is meager, and $U \forces B$, so $U \setminus B$ is meager, so their union is also meager.
+        So then $U \setminus (A \cap B) = (U \setminus A) \cup (U \setminus B)$ is meager, so $U \forces A \cap B$.
+
+        \[
+            U \setminus (A \cap B) = U \cap (A \cap B)^c = U \cap (A^c \cup B^c) = (U \cap A^c) \cup (U \cap B^c) = (U \setminus A) \cup (U \setminus B)
+        \]
+    \end{proof}
+}
+
+\newcommand{\forcesIsNonemptyInBaire}[1][forcesIsNonemptyInBaire]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $X$ be a topological space, let $U \subseteq X$ be a nonmeager set, and let $A \subseteq X$.
+        If $U \forces A$, then $U \cap A \neq \emptyset$.
+    \end{lemma}
+    \begin{proof}
+        Suppose $U \forces A$, so $U \setminus A$ is meager.
+        If $U \cap A = \emptyset$, then $U \setminus A = U$ and $U$ is meager, but $U$ was assumed to be nonmeager, which is a contradiction.
+        So $U \cap A \neq \emptyset$.
+    \end{proof}
+}
+
+\newcommand{\continuousAtIdIsContinuous}[1][continuousAtIdIsContinuous]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $G$ and $H$ be a topological groups, and let $\varphi : G \to H$ be a group homomorphism.
+        If $\varphi$ is continuous at $\id{G}$, then $\varphi$ is continuous.
+    \end{lemma}
+    \begin{proof}
+        Suppose $\varphi$ is continuous at $\id{G}$, so for every open set $U \subseteq H$ containing $\id{H}$, $\varphi^{-1}(U)$ is open.
+
+        Let $V \subseteq H$ be a nonempty open set; then let $g \in \varphi^{-1}(V)$.
+        But then $\varphi(g)^{-1} V$ is an open neighborhood of $\id{H}$, so $\varphi^{-1}(\varphi(g)^{-1} V)$ is an open set containing $\id{G}$.
+        Then $W = g \varphi^{-1}( \varphi(g)^{-1} V)$ is an open neighborhood of $g$.
+        But:
+
+        \[
+            \varphi(W) = \varphi(g \varphi^{-1}( \varphi(g)^{-1} V) = \varphi(g) \varphi(g)^{-1} V = V
+        \]
+
+        So then $g \in W \subseteq \varphi^{-1}(V)$, so $\varphi$ is continuous.
+    \end{proof}
+}
+
+\newcommand{\measureIsMonotonic}[1][measureIsMonotonic]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $(X, \mu)$ be a measure space, and $A$ and $B$ be measurable subsets of $X$ so that $A \subseteq B$.
+        Then $\mu(A) \leq \mu(B)$.
+    \end{lemma}
+    \begin{proof}
+        We have $B = A \cup (B \setminus A)$, so $\lambda(B) = \lambda(A) + \lambda(B \setminus A)$, so $\lambda(B) \geq \lambda(A)$.
+    \end{proof}
+}
+
+\newcommand{\closureDualToInterior}[1][closureDualToInterior]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $X$ be a topological space and let $A$ be some subset of $X$.
+        Then $\closure{A} = \compl{\interior{\compl{A}}}$.
+    \end{lemma}
+    \begin{proof}
+        Suppose $x \in \closure{A} = A \cup \boundary A$.
+        If $x \in A$, then $x \not\in A^c$, and $\interior{A^c} \subseteq A^c$, so $x \not\in \interior{A^c}$.
+        If $x \in \boundary A$, suppose for a contradiction that $x \in \interior{A^c}$.
+        But then $\interior{A^c} \cap A \neq \emptyset$, so $A^c \cap A \neq \emptyset$, which is a contradiction.
+        So then $\closure{A} \subseteq \compl{\interior{\compl{A}}}$.
+
+        Suppose $x \in \compl{\interior{\compl{A}}}$.
+        Suppose $x \in \compl{A}$ (otherwise it's obvious), and let $U$ be some open set containing $x$.
+        If $U \cap A = \emptyset$, then $U \subseteq \compl{A}$, so $U \subseteq \interior{\compl{A}}$ by definition of the interior.
+        But $x \not\in \interior{\compl{A}}$ and $x \in U$, so this is a contradiction and $x \in \boundary A$.
+        Then $\compl{\interior{\compl{A}}} \subseteq \closure{A}$.
+    \end{proof}
+}
+
+\newcommand{\complementOfMeasurableIsMeasurable}[1][complementOfMeasurableIsMeasurable]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $(X,\mu)$ be a Borel measure space, and suppose $A$ is Borel measurable.
+        Then $\compl{A}$ is also Borel measurable.
+    \end{lemma}
+    \begin{proof}
+        $A$ is Borel measurable, so $A =_{\mu} B$ for some Borel set $B$, or $\mu(A \symdif B) = 0$.
+        But $\compl{A} \symdif \compl{B} = A \symdif B$, and Borel sets form a $\sigma$-algebra, so $\compl{A} =_{\mu} \compl{B}$ and so $\compl{A}$ is measurable.
+    \end{proof}
+}
+

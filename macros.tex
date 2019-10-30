@@ -15,10 +15,22 @@
 
 \renewcommand{\epsilon}{\varepsilon}
 
+\newcommand{\piclass}[2]{\ensuremath{\bm{\Pi}^{#1}_{#2}}}
+\newcommand{\sigmaclass}[2]{\ensuremath{\bm{\Sigma}^{#1}_{#2}}}
+\newcommand{\deltaclass}[2]{\ensuremath{\bm{\Delta}^{#1}_{#2}}}
+\newcommand{\gammaclass}{\ensuremath{\bm{\Gamma}}}
+\newcommand{\borel}[1]{\ensuremath{\mathcal{B}\parens{#1}}}
+
+\newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
 \newcommand{\iso}{\ensuremath{\cong}}
 \newcommand{\symdif}{\ensuremath{\bigtriangleup}}
+\newcommand{\dual}{\ensuremath{\neg}}
 \newcommand{\forces}{\ensuremath{\Vdash}}
+\newcommand{\semiprod}[3][]{\ensuremath{#2 \rtimes_{#1} #3}}
+\newcommand{\units}[1]{\ensuremath{#1^{\times}}}
 \newcommand{\gl}[2]{\ensuremath{\text{GL}\parens{#1, #2}}}
+
+\newcommand{\proj}[1]{\text{proj}_{#1}}
 
 %\newcommand{\reed}[1]{\relax}
 %\newcommand{\Fix}[1]{\relax}
@@ -34,6 +46,9 @@
 \newcommand{\onto}{\surjects}
 
 \newcommand{\interior}[1]{\ensuremath{\text{int}\parens{#1}}}
+\newcommand{\closure}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\compl}[1]{\ensuremath{{#1}^c}}
+\newcommand{\boundary}{\ensuremath{\partial}}
 
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
@@ -56,6 +71,7 @@
 \newcommand{\subgroup}[2]{\ensuremath{#1 < #2}}
 \newcommand{\normalsubgroup}[2]{\ensuremath{#1 \triangleleft #2}}
 \newcommand{\id}[1]{\ensuremath{\bm{1}_{#1}}}
+\newcommand{\indicator}[1]{\ensuremath{\mathbbm{1}_{#1}}}
 
 \newcommand{\notationNonZero}[1][X]{Let $\nonzero{#1}$ denote the set of $x \in #1$ so that $x \neq 0$.\xspace}
 \newcommand{\notationGreaterSet}[1][X]{Let $\greaterset{#1}{y}$ denote the set of $x \in #1$ so that $x > y$.\xspace}
@@ -119,18 +135,20 @@
 
 \newcommand{\subgroupgen}[1]{\ensuremath{{\left< {#1} \right>}}}
 
-\newcommand{\idmatrix}[1]{%
+\newcommand{\diagmatrix}[2]{%
     \setcounter{n1}{#1 - 1}
     \begin{pmatrix}
         \forloop{i}{0}{\value{i} < #1}{%
             \forloop{j}{0}{\value{j} < #1}{%
-                \ifthenelse{\equal{\value{i}}{\value{j}}}{1}{0}
+                \ifthenelse{\equal{\value{i}}{\value{j}}}{#2}{0}
                 \ifthenelse{\value{j} < \value{n1}}{&}{}
             }
             \ifthenelse{\value{i} < \value{n1}}{\\}{}
         }
     \end{pmatrix}
 }
+
+\newcommand{\idmatrix}[1]{\diagmatrix{#1}{1}}
 
 \newcommand{\twobytwo}[4]{\ensuremath{\begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}}}
 
