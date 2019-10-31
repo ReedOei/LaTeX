@@ -135,3 +135,22 @@
     \end{proof}
 }
 
+\newcommand{\seqInCompactConvergeIffOneClusterPoint}[1][seqInCompactConvergeIffOneClusterPoint]{%
+    \begin{lemma}\expandafter\label{lem:#1}
+        Let $X$ be a compact topological space and $\natseqi{x}{n}$ some sequence in $X$.
+        Then $x_n \to x$ if and only if $x$ is the only cluster point of $\natseqi{x}{n}$.
+    \end{lemma}
+    \begin{proof}
+        ($\implies$) If $x_n \to x$, then clearly $x$ is the only cluster point of $\natseqi{x}{n}$.
+
+        ($\impliedby$) Suppose that $x$ is the only cluster point of $\natseqi{x}{n}$.
+        Then for every other $y \in X$, there is some open neighborhood $V$ of $y$ so that $\natseqi{x}{n}$ is eventually never in $V$.
+        Note that none of the sets $V$ contains $x$, because otherwise $x_n$ would be in $V$ infinitely often.
+        Let $\mathcal{V}$ be the collection of all such sets.
+
+        We wish to show that $x_n \to x$, or that for every open neighborhood $U$ of $x$, $\natseqi{x}{n}$ is eventually inside $U$.
+        Then $\mathcal{V} \cup \curlys{U}$ is an open cover for $X$, so because $X$ is compact there is some finite subcover so $X = V_1 \cup \cdots \cup V_n \cup U$; $U$ must be in the cover because ti is the only set containing $x$.
+        But $\natseqi{x}{n}$ is eventually not in any of the $V_i$'s, so it must be eventually inside $U$.
+    \end{proof}
+}
+
