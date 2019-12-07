@@ -21,6 +21,8 @@
 \newcommand{\gammaclass}{\ensuremath{\bm{\Gamma}}}
 \newcommand{\borel}[1]{\ensuremath{\mathcal{B}\parens{#1}}}
 
+\newcommand{\saturate}[2]{\squares{#1}_{#2}}
+
 \newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
 \newcommand{\iso}{\ensuremath{\cong}}
 \newcommand{\symdif}{\ensuremath{\bigtriangleup}}
@@ -58,6 +60,8 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{claim}{Claim}
 \newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
 
 \newcommand{\nat}{\ensuremath{\mathbb{N}}}
 \newcommand{\real}{\ensuremath{\mathbb{R}}}
@@ -157,10 +161,45 @@
 
 \newcommand{\finitecommabody}[1]{}
 \newcommand{\countablecommabody}[1]{}
+
+% #1 - The thing to repeat
+% #2 - The operation to use to combine
+% #3 - The number of times to repeat (used for comment, \cdots is used for the actual body)
+\newcommand{\ntimes}[3]{\overbrace{#1 #2 \cdots #2 #1}^{#3 \text{ times}}}
+
+\newcommand{\finiteopfromone}[3]{%
+    \renewcommand{\finitecommabody}[1]{#1}%
+    \ensuremath{\finitecommabody{1} #2 \finitecommabody{2} #2 \cdots #2 \finitecommabody{#3}}}
+\newcommand{\finiteop}[3]{%
+    \renewcommand{\finitecommabody}[1]{#1}%
+    \ensuremath{\finitecommabody{0} #2 \finitecommabody{1} #2 \cdots #2 \finitecommabody{#3 - 1}}}
+
+% #1 - The body expression (e.g., x_{#1}, where #1 is where the index will go)
+% #2 - The operation to use
+% #3 - The index of the element to skip
+% #4 - The end index
+\newcommand{\finiteopskipfromone}[4]{%
+    \renewcommand{\finitecommabody}[1]{#1}%
+    \ensuremath{\finitecommabody{1} #2 \cdots #2 \finitecommabody{#3 - 1} #2 \finitecommabody{#3 + 1} #2 \cdots #2 \finitecommabody{#3}}}
+\newcommand{\finiteopskip}[4]{%
+    \renewcommand{\finitecommabody}[1]{#1}%
+    \ensuremath{\finitecommabody{0} #2 \cdots #2 \finitecommabody{#3 - 1} #2 \finitecommabody{#3 + 1} #2 \cdots #2 \finitecommabody{#3 - 1}}}
+
+\newcommand{\finitecommafromone}[2]{%
+    \renewcommand{\finitecommabody}[1]{#1}%
+    \ensuremath{\finitecommabody{1}, \finitecommabody{2}, \ldots, \finitecommabody{#2}}}
+\newcommand{\finitesetfromone}[2]{\ensuremath{\curlys{\finitecommafromone{#1}{#2}}}}
+
 \newcommand{\finitecomma}[2]{%
     \renewcommand{\finitecommabody}[1]{#1}%
     \ensuremath{\finitecommabody{0}, \finitecommabody{1}, \ldots, \finitecommabody{#2 - 1}}}
 \newcommand{\finiteset}[2]{\ensuremath{\curlys{\finitecomma{#1}{#2}}}}
+
+\newcommand{\countablecommafromone}[1]{\ensuremath{%
+    \renewcommand{\countablecommabody}[1]{#1}%
+    \ensuremath{\countablecommabody{1}, \countablecommabody{2}, \ldots}}}
+\newcommand{\countablesetfromone}[1]{\ensuremath{\curlys{\countablecomma1idx{#1}}}}
+
 \newcommand{\countablecomma}[1]{\ensuremath{%
     \renewcommand{\countablecommabody}[1]{#1}%
     \ensuremath{\countablecommabody{0}, \countablecommabody{1}, \ldots}}}
