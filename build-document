@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -ex
+
+doc_file="$1"
+
+if [[ -z "$doc_file" ]]; then
+    echo "Usage: $0 TEX_FILENAME"
+    exit 1
+fi
+
+doc="$(basename "$doc_file" ".tex")"
+
+pdflatex "$doc.tex"
+
+if [[ -f "$doc.sagetex.sage" ]]; then
+    sage "$doc.sagetex.sage"
+    pdflatex "$doc.tex"
+fi
+
+xdg-open "$doc.pdf"
+
