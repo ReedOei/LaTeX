@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+if [[ -z "$1" ]]; then
+    echo "USAGE: $0 NUMBER PROB_INPUT [TEMPLATE] [TARGET_NAME]"
+    echo "PROB_INPUT - A space separated list of the number of subproblems for each problem"
+    exit 1
+fi
+
+number="$1"
+prob_input="$2"
+
+template="$(git rev-parse --show-toplevel)/LaTeX/template.tex"
+target="main.tex"
+
+if [[ ! -z "$3" ]]; then
+    template="$3"
+fi
+
+if [[ ! -z "$4" ]]; then
+    target="$4"
+fi
+
+mkdir "HW$number"
+cp "$template" "HW$number/$target"
+(
+    echo ":normal! G"
+    echo ":normal! 3k"
+    echo ":call MathHomeworkTemplate(\"$prob_input\")"
+    echo ":wq"
+) > temp
+
+vim -s temp "HW$number/$target"
+rm temp
+
