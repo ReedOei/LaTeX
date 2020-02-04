@@ -15,6 +15,12 @@
 
 \renewcommand{\epsilon}{\varepsilon}
 
+% From: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Automating_file_inclusion
+\newcommand{\includecode}[2][c]{\lstinputlisting[caption=#2, basicstyle=\normalsize\ttfamily]{#2}}
+
+\newcommand{\join}{\bigvee}
+\newcommand{\meet}{\bigwedge}
+
 \newcommand{\piclass}[2]{\ensuremath{\bm{\Pi}^{#1}_{#2}}}
 \newcommand{\sigmaclass}[2]{\ensuremath{\bm{\Sigma}^{#1}_{#2}}}
 \newcommand{\deltaclass}[2]{\ensuremath{\bm{\Delta}^{#1}_{#2}}}
@@ -34,6 +40,8 @@
 
 \newcommand{\proj}[1]{\text{proj}_{#1}}
 
+\newcommand{\lcm}{\text{lcm}}
+
 %\newcommand{\reed}[1]{\relax}
 %\newcommand{\Fix}[1]{\relax}
 \newcommand{\reed}[1]{{\color{magenta}\bfseries [#1]}}
@@ -42,10 +50,14 @@
 \newcommand{\Space}[1]{}
 \newcommand{\Num}[1]{#1}
 
+\newcommand{\e}{\ensuremath{\text{e}}}
+
 \newcommand{\injects}{\ensuremath{\hookrightarrow}}
 \newcommand{\into}{\injects}
 \newcommand{\surjects}{\ensuremath{\twoheadrightarrow}}
 \newcommand{\onto}{\surjects}
+
+\newcommand{\actson}{\ensuremath{\curvearrowright}}
 
 \newcommand{\interior}[1]{\ensuremath{\text{int}\parens{#1}}}
 \newcommand{\closure}[1]{\ensuremath{\overline{#1}}}
@@ -64,10 +76,19 @@
 \newtheorem{example}{Example}
 
 \newcommand{\nat}{\ensuremath{\mathbb{N}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\real}{\ensuremath{\mathbb{R}}}
+\newcommand{\reals}{\ensuremath{\mathbb{R}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\integer}{\ensuremath{\mathbb{Z}}}
 \newcommand{\integers}{\ensuremath{\mathbb{Z}}}
 \newcommand{\rational}{\ensuremath{\mathbb{Q}}}
+\newcommand{\rationals}{\ensuremath{\mathbb{Q}}}
+\newcommand{\rat}{\ensuremath{\mathbb{Q}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
 \newcommand{\complex}{\ensuremath{\mathbb{C}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
 
 \newcommand{\nonzero}[1]{\ensuremath{#1_{\neq 0}}}
 \newcommand{\greaterset}[2]{\ensuremath{#1_{> #2}}}
@@ -198,12 +219,16 @@
 \newcommand{\countablecommafromone}[1]{\ensuremath{%
     \renewcommand{\countablecommabody}[1]{#1}%
     \ensuremath{\countablecommabody{1}, \countablecommabody{2}, \ldots}}}
-\newcommand{\countablesetfromone}[1]{\ensuremath{\curlys{\countablecomma1idx{#1}}}}
+\newcommand{\ctblcommafromone}[1]{\ensuremath{\countablecommafromone{#1}}}
+\newcommand{\countablesetfromone}[1]{\ensuremath{\curlys{\countablecommafromone{#1}}}}
+\newcommand{\ctblsetfromone}[1]{\ensuremath{\curlys{\countablecommafromone{#1}}}}
 
 \newcommand{\countablecomma}[1]{\ensuremath{%
     \renewcommand{\countablecommabody}[1]{#1}%
     \ensuremath{\countablecommabody{0}, \countablecommabody{1}, \ldots}}}
+\newcommand{\ctblcomma}[1]{\ensuremath{\countablecomma{#1}}}
 \newcommand{\countableset}[1]{\ensuremath{\curlys{\countablecomma{#1}}}}
+\newcommand{\ctblset}[1]{\ensuremath{\curlys{\countablecomma{#1}}}}
 
 \newcommand{\woutlog}{without loss of generality\xspace}
 \newcommand{\Woutlog}{Without loss of generality\xspace}

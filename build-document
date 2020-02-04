@@ -3,6 +3,7 @@
 set -ex
 
 doc_file="$1"
+cached_version=".sage_cache"
 
 if [[ -z "$doc_file" ]]; then
     echo "Usage: $0 TEX_FILENAME"
@@ -11,11 +12,14 @@ fi
 
 doc="$(basename "$doc_file" ".tex")"
 
-pdflatex "$doc.tex"
+pdflatex -shell-escape "$doc.tex"
 
 if [[ -f "$doc.sagetex.sage" ]]; then
-    sage "$doc.sagetex.sage"
-    pdflatex "$doc.tex"
+    if [[ ! -f "$cached_version" ]] || ! md5sum --check "$cached_version"; then
+        sage "$doc.sagetex.sage"
+        pdflatex -shell-escape "$doc.tex"
+        md5sum "$doc.sagetex.sage" > "$cached_version"
+    fi
 fi
 
 xdg-open "$doc.pdf"
