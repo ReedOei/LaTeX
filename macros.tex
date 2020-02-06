@@ -18,6 +18,17 @@
 % From: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Automating_file_inclusion
 \newcommand{\includecode}[2][c]{\lstinputlisting[caption=#2, basicstyle=\normalsize\ttfamily]{#2}}
 
+\newcommand{\bigstep}[2]{#1 \Downarrow #2}
+
+\newcommand{\eq}[1]{\begin{align*} #1 \end{align*}}
+
+\newcommand{\includeplot}[2][0.3]{%
+\begin{figure}[H]
+    \scalebox{#1}{\sageplot{#2}}
+\end{figure}}
+
+\newcommand{\partialdiff}[1]{\frac{\partial}{\partial #1}}
+
 \newcommand{\join}{\bigvee}
 \newcommand{\meet}{\bigwedge}
 
@@ -63,6 +74,8 @@
 \newcommand{\closure}[1]{\ensuremath{\overline{#1}}}
 \newcommand{\compl}[1]{\ensuremath{{#1}^c}}
 \newcommand{\boundary}{\ensuremath{\partial}}
+
+\newcommand{\proves}{\vdash}
 
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
@@ -144,7 +157,10 @@
 
 \newcommand{\tand}{\ensuremath{~\text{and}~}}
 \newcommand{\tor}{\ensuremath{~\text{or}~}}
+\newcommand{\twhere}{\ensuremath{~\text{where}~}}
+\newcommand{\tif}{\ensuremath{~\text{where}~}}
 \newcommand{\tsuchthat}{\ensuremath{~\text{s.t.}~}}
+\newcommand{\owise}{\ensuremath{~\text{otherwise}~}}
 
 \newcommand{\beatree}[1]{\ensuremath{\subseteq {#1}^{\leq \nat}}}
 
