@@ -16,7 +16,7 @@
 \renewcommand{\epsilon}{\varepsilon}
 
 % From: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Automating_file_inclusion
-\newcommand{\includecode}[2][c]{\lstinputlisting[caption=#2, basicstyle=\normalsize\ttfamily]{#2}}
+\newcommand{\includecode}[2][c]{\lstinputlisting[language=#1, caption=#2, basicstyle=\normalsize\ttfamily]{#2}}
 
 \newcommand{\bigstep}[2]{#1 \Downarrow #2}
 
@@ -28,6 +28,12 @@
 \end{figure}}
 
 \newcommand{\partialdiff}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\diff}[1]{\frac{\text{d}}{\text{d} #1}}
+
+\newcommand{\im}[1]{\ensuremath{\text{im}\parens{#1}}}
+
+\newcommand{\true}{\textbf{\textsf{T}}}
+\newcommand{\false}{\textbf{\textsf{F}}}
 
 \newcommand{\join}{\bigvee}
 \newcommand{\meet}{\bigwedge}
@@ -94,6 +100,7 @@
 \newcommand{\reals}{\ensuremath{\mathbb{R}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Zmod}[1]{\ensuremath{\Z/#1\Z}}
 \newcommand{\integer}{\ensuremath{\mathbb{Z}}}
 \newcommand{\integers}{\ensuremath{\mathbb{Z}}}
 \newcommand{\rational}{\ensuremath{\mathbb{Q}}}
@@ -106,8 +113,8 @@
 \newcommand{\nonzero}[1]{\ensuremath{#1_{\neq 0}}}
 \newcommand{\greaterset}[2]{\ensuremath{#1_{> #2}}}
 \newcommand{\lesserset}[2]{\ensuremath{#1_{< #2}}}
-\newcommand{\subgroup}[2]{\ensuremath{#1 < #2}}
-\newcommand{\normalsubgroup}[2]{\ensuremath{#1 \triangleleft #2}}
+\newcommand{\subgroup}{\leq}
+\newcommand{\normalsubgroup}{\trianglelefteq}
 \newcommand{\id}[1]{\ensuremath{\bm{1}_{#1}}}
 \newcommand{\indicator}[1]{\ensuremath{\mathbbm{1}_{#1}}}
 

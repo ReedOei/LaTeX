@@ -9,19 +9,23 @@ fi
 number="$1"
 prob_input="$2"
 
-template="$(git rev-parse --show-toplevel)/LaTeX/template.tex"
+hw_dir="HW$number"
+
+latex_dir="$(realpath --relative-to="$(pwd)" "$(dirname "${BASH_SOURCE[0]}")")"
+template="$latex_dir/template.tex"
 target="main.tex"
 
-if [[ ! -z "$3" ]]; then
+if [[ -n "$3" ]]; then
     template="$3"
 fi
 
-if [[ ! -z "$4" ]]; then
+if [[ -n "$4" ]]; then
     target="$4"
 fi
 
-mkdir "HW$number"
-cp "$template" "HW$number/$target"
+mkdir "$hw_dir"
+cp "$template" "$hw_dir/$target"
+sed -E -i "s|<LATEX_DIR>|../$latex_dir|g" "$hw_dir/$target"
 (
     echo ":normal! G"
     echo ":normal! 3k"
@@ -29,6 +33,6 @@ cp "$template" "HW$number/$target"
     echo ":wq"
 ) > temp
 
-vim -s temp "HW$number/$target"
+vim -s temp "$hw_dir/$target"
 rm temp
 

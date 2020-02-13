@@ -9,11 +9,11 @@ search_path="$1"
 search_path_filter=".*"
 output_file="out.pdf"
 
-if [[ ! -z "$2" ]]; then
+if [[ -n "$2" ]]; then
     search_path_filter="$2"
 fi
 
-if [[ ! -z "$3" ]]; then
+if [[ -n "$3" ]]; then
     output_file="$3"
 fi
 
