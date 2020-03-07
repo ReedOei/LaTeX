@@ -1,6 +1,7 @@
 \usepackage{xcolor}
 \usepackage{forloop}
 \usepackage{ifthen}
+\usepackage{xifthen}
 \usepackage{calc}
 \usepackage{xspace}
 \usepackage{mathrsfs}
@@ -12,7 +13,10 @@
 \newcommand{\concat}{%
   \mathbin{\raisebox{0.5ex}{\scalebox{.7}{$\frown$}}}%
 }
+\newcommand{\bnfdef}{\ensuremath{\Coloneqq}}
+\newcommand{\bnfalt}{\ensuremath{\mid}\xspace}
 
+\newcommand{\imp}{\Rightarrow}
 \renewcommand{\epsilon}{\varepsilon}
 
 % From: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Automating_file_inclusion
@@ -30,7 +34,15 @@
 \newcommand{\partialdiff}[1]{\frac{\partial}{\partial #1}}
 \newcommand{\diff}[1]{\frac{\text{d}}{\text{d} #1}}
 
-\newcommand{\im}[1]{\ensuremath{\text{im}\parens{#1}}}
+\newcommand{\derive}[3][]{%
+    \ifthenelse{\isempty{#1}}{%
+        \frac{\text{d} #2}{\text{d} #3}%
+    }{%
+        \frac{\text{d}^{#1} #2}{\text{d} #3^{#1}}%
+    }%
+}
+
+\newcommand{\im}[1]{\ensuremath{\text{im} {#1}}}
 
 \newcommand{\true}{\textbf{\textsf{T}}}
 \newcommand{\false}{\textbf{\textsf{F}}}
@@ -127,6 +139,8 @@
 
 % \Sym{X} is the set of bijections from X to X
 \newcommand{\Sym}[1]{\ensuremath{\text{Sym}\parens{#1}}}
+\newcommand{\Inn}[1]{\ensuremath{\text{Inn}\parens{#1}}}
+\newcommand{\Out}[1]{\ensuremath{\text{Out}\parens{#1}}}
 \newcommand{\Aut}[1]{\ensuremath{\text{Aut}\parens{#1}}}
 \newcommand{\notationSym}[1][X]{Let $\Sym{X}$ be the group of bijections of $X$.\xspace}
 
@@ -165,7 +179,7 @@
 \newcommand{\tand}{\ensuremath{~\text{and}~}}
 \newcommand{\tor}{\ensuremath{~\text{or}~}}
 \newcommand{\twhere}{\ensuremath{~\text{where}~}}
-\newcommand{\tif}{\ensuremath{~\text{where}~}}
+\newcommand{\tif}{\ensuremath{~\text{if}~}}
 \newcommand{\tsuchthat}{\ensuremath{~\text{s.t.}~}}
 \newcommand{\owise}{\ensuremath{~\text{otherwise}~}}
 
