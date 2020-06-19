@@ -16,6 +16,8 @@
 \newcommand{\bnfdef}{\ensuremath{\Coloneqq}}
 \newcommand{\bnfalt}{\ensuremath{\mid}\xspace}
 
+\newcommand{\colvec}[1]{\ensuremath{\begin{pmatrix} #1 \end{pmatrix}}}
+
 \newcommand{\imp}{\Rightarrow}
 \renewcommand{\epsilon}{\varepsilon}
 
@@ -25,6 +27,13 @@
 \newcommand{\bigstep}[2]{#1 \Downarrow #2}
 
 \newcommand{\eq}[1]{\begin{align*} #1 \end{align*}}
+
+\newcommand{\Hom}{\ensuremath{\text{Hom}}}
+\newcommand{\Tor}{\ensuremath{\text{Tor}}}
+\newcommand{\ch}{\ensuremath{\text{ch}}}
+
+\newcommand{\spanvec}{\ensuremath{\text{span}}}
+\newcommand{\trace}[1]{\ensuremath{\text{Tr}\parens{#1}}}
 
 \newcommand{\includeplot}[2][0.3]{%
 \begin{figure}[H]
@@ -94,6 +103,7 @@
 \newcommand{\boundary}{\ensuremath{\partial}}
 
 \newcommand{\proves}{\vdash}
+\newcommand{\satisfies}{\models}
 
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
@@ -105,6 +115,8 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+\newtheorem{notation}{Notation}
 
 \newcommand{\nat}{\ensuremath{\mathbb{N}}}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
@@ -182,6 +194,8 @@
 \newcommand{\tif}{\ensuremath{~\text{if}~}}
 \newcommand{\tsuchthat}{\ensuremath{~\text{s.t.}~}}
 \newcommand{\owise}{\ensuremath{~\text{otherwise}~}}
+
+\newcommand{\ff}[1]{\ensuremath{\mathbb{F}_{#1}}}
 
 \newcommand{\beatree}[1]{\ensuremath{\subseteq {#1}^{\leq \nat}}}
 

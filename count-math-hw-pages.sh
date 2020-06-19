@@ -17,6 +17,7 @@ if [[ -n "$3" ]]; then
     output_file="$3"
 fi
 
+# TODO: Should search for names other than main.pdf
 files="$(find "$search_path" -name "main.pdf" | grep -E "$search_path_filter" | tr "\n" " ")"
 echo "$files"
 pdfunite $files "$output_file"
