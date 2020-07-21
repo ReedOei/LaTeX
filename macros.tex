@@ -109,15 +109,15 @@
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{proposition}{Proposition}
-\newtheorem{claim}{Claim}
-\newtheorem{corollary}{Corollary}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
-\newtheorem{remark}{Remark}
-\newtheorem{notation}{Notation}
+\ifdefined\theorem\else\newtheorem{theorem}{Theorem}\fi
+\ifdefined\lemma\else\newtheorem{lemma}{Lemma}\fi
+\ifdefined\proposition\else\newtheorem{proposition}{Proposition}\fi
+\ifdefined\claim\else\newtheorem{claim}{Claim}\fi
+\ifdefined\corollary\else\newtheorem{corollary}{Corollary}\fi
+\ifdefined\definition\else\newtheorem{definition}{Definition}\fi
+\ifdefined\example\else\newtheorem{example}{Example}\fi
+\ifdefined\remark\else\newtheorem{remark}{Remark}\fi
+\ifdefined\notation\else\newtheorem{notation}{Notation}\fi
 
 \newcommand{\nat}{\ensuremath{\mathbb{N}}}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
