@@ -101,7 +101,7 @@
 \newcommand{\interior}[1]{\ensuremath{\text{int}\parens{#1}}}
 \newcommand{\closure}[1]{\ensuremath{\overline{#1}}}
 \newcommand{\compl}[1]{\ensuremath{{#1}^c}}
-\newcommand{\boundary}{\ensuremath{\partial}}
+\ifdefined\boundary\else\newcommand{\boundary}{\ensuremath{\partial}}\fi
 
 \newcommand{\proves}{\vdash}
 \newcommand{\satisfies}{\models}
