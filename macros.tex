@@ -10,6 +10,14 @@
 \newcounter{j}
 \newcounter{n1}
 
+\newcommand\Wider[2][3em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
+
 \newcommand{\concat}{%
   \mathbin{\raisebox{0.5ex}{\scalebox{.7}{$\frown$}}}%
 }
