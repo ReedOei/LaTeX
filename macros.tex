@@ -24,6 +24,10 @@
 \newcommand{\bnfdef}{\ensuremath{\Coloneqq}}
 \newcommand{\bnfalt}{\ensuremath{\mid}\xspace}
 
+% \let\oldfrac\frac
+% This almost works (i.e., lets you write \frac{x} to get \frac{1}{x}), but then you have to write \frac[x]{y} with square brackets. Idk enough about latex atm to fix this, or care enough to google, but someday maybe I will so I'm leaving it here.
+% \renewcommand{\frac}[2][1]{\oldfrac{#1}{#2}}
+
 \newcommand{\colvec}[1]{\ensuremath{\begin{pmatrix} #1 \end{pmatrix}}}
 
 \newcommand{\imp}{\Rightarrow}
@@ -51,6 +55,11 @@
 \newcommand{\partialdiff}[1]{\frac{\partial}{\partial #1}}
 \newcommand{\diff}[1]{\frac{\text{d}}{\text{d} #1}}
 \newcommand{\partialfunc}{\rightharpoonup}
+
+\newcommand{\Log}{\text{Log}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\Arg}{\text{Arg}}
+\newcommand{\argcomplex}{\text{arg}}
 
 \newcommand{\derive}[3][]{%
     \ifthenelse{\isempty{#1}}{%
@@ -149,7 +158,7 @@
 \newcommand{\rat}{\ensuremath{\mathbb{Q}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
 \newcommand{\complex}{\ensuremath{\mathbb{C}}}
-% \newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
 
 \newcommand{\nonzero}[1]{\ensuremath{#1_{\neq 0}}}
 \newcommand{\greaterset}[2]{\ensuremath{#1_{> #2}}}
